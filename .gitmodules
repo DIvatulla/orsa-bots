@@ -1,0 +1,3 @@
+[submodule "vms-scripts"]
+	path = vms-scripts
+	url = https://github.com/DIvatulla/vms-scripts.git
