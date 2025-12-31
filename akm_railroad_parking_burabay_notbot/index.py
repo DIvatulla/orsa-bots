@@ -1,5 +1,6 @@
 import sys
 import re
+import time
 sys.path.append("../vms-scripts/http")
 sys.path.append("../vms-scripts/modules")
 from zabbixapi import zabbix
@@ -18,6 +19,7 @@ botapi = bot()
 eventids = []
 hostids = []
 problems = zapi.method("problem.get", {"output": "extend", "groupids": groupids})
+
 for problem in problems:
 	eventids.append(problem["eventid"])
 		
@@ -26,7 +28,8 @@ events = zapi.method("event.get", {"output": "extend", "eventids": eventids, "se
 for i in range(0, len(events)):
 	if events[i]["severity"] == "4":
 		message = ""
-		message += f"{i+1}\\.\n*{mdformat(events[i]["hosts"][0]["name"])}\\({mdformat(events[i]["hosts"][0]["host"])}\\)*\n"
-		message += f"*{mdformat(events[i]["name"])}*\n"
-		message += f"since\\: `{mdformat(str(datetime.fromtimestamp(int(events[i]["clock"]), tz=kztimezone())))}`\n"
+		message += f"{i+1}\\.\n*{mdformat(events[i]['hosts'][0]['name'])}\\({mdformat(events[i]['hosts'][0]['host'])}\\)*\n"
+		message += f"*{mdformat(events[i]['name'])}*\n"
+		message += f"since\\: `{mdformat(str(datetime.fromtimestamp(int(events[i]['clock']), tz=kztimezone())))}`\n"
+		time.sleep(2)
 		botapi.send_msg(message)
