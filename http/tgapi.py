@@ -55,3 +55,17 @@ class bot():
 	def mdformat(s: str) -> str:
 		escape_chars = r"\_[]()~>+-=|{}.!"
 		return re.sub(f"([{re.escape(escape_chars)}])", r"\\\1", s)
+
+	def send_doc(self, doc: bytes):
+		tmp = self.https.request.path
+
+		self.https.request.path += "sendMessage"
+		self.https.request.body = {
+			"chat_id": self.chat_id,
+			"text": self.mdformat(text),
+			"parse_mode": "MarkdownV2"	
+			
+		}		
+
+
+
