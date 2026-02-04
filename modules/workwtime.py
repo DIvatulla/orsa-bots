@@ -15,7 +15,7 @@ class workwtime:
 		return datetime.now(kztimezone())	
 
 	@staticmethod
-	def delta(date: str, measure: str = ""):
+	def delta_human_readable(date: str, measure: str = ""):
 		mod = 1
 		diff = int((workwtime.current_date() - datetime.fromisoformat(date)).total_seconds())
 
@@ -27,6 +27,7 @@ class workwtime:
 			case "m":
 				mod = 60	
 
+		print(diff)
 		return ((workwtime.current_date() - datetime.fromisoformat(date)).total_seconds()) // mod
 
 	@staticmethod
