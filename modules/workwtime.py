@@ -43,3 +43,7 @@ class workwtime:
 		}
 	
 		return date_filter
+
+	@staticmethod
+	def epoch_to_iso(ts: int):
+		return datetime.fromtimestamp(ts, tz=kztimezone())
