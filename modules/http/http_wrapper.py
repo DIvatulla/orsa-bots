@@ -1,5 +1,5 @@
 import sys
-sys.path.append("../modules/")
+sys.path.append("../")
 import list_operations
 from abc import ABC, abstractmethod
 import http.client
